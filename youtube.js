@@ -1,9 +1,9 @@
 setTimeout(function() {
 	for(var j=0;j<document.scripts.length;j++) {
-		if(urls = document.scripts[j].innerHTML.match(/url_encoded_fmt_stream_map=[^\\]*/)) {
-
-			var url_arr = decodeURIComponent(urls.toString().replace(/url_encoded_fmt_stream_map=/g, "")).split(",")
-			var each_fmt = decodeURIComponent(document.scripts[j].innerHTML.match(/fmt_list=[^\\]*/).toString().replace(/fmt_list=/g, "")).split(",")
+		if(matched = document.scripts[j].innerHTML.match(/yt.playerConfig = [^<]*/)) {
+			var yt = JSON.parse(matched[0].replace(/yt.playerConfig = /g, "").replace(/\};/g, "}"));
+			var url_arr = yt.args.url_encoded_fmt_stream_map.split(",")
+			var each_fmt = yt.args.fmt_list.replace(/\\\//g, "/").split(",")
 
 			var tab = ''+
 			'<span><button id="catch" role="button" data-trigger-for="action-panel-download" data-button-toggle="true" onclick=";return false;" class="action-panel-trigger yt-uix-button yt-uix-button-hh-text" type="button"><span class="yt-uix-button-content">'+
@@ -19,7 +19,7 @@ setTimeout(function() {
 			{
 				if(each_fmt[i-1] != undefined)
 				{
-					var title = '&title='+document.getElementById('watch-headline-title').innerHTML.replace(/(<([^>]+)>)/ig,"").trim();
+					var title = '&title='+document.getElementById('watch-headline-title').innerHTML.replace(/(<([^>]+)>)/ig,"").trim().replace(/ /g, "+");
 					url_arr[i] = "&"+url_arr[i];
 					var sig = "&signature="+getParameterByName(url_arr[i], "sig");
 					var tag = getParameterByName(url_arr[i], "type");
