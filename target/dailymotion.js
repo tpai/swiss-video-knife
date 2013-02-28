@@ -1,4 +1,4 @@
-setTimeout(function() {
+window.onload = function() {
 	var li = document.createElement("li");
 		li.setAttribute("id", "videoDownloader");
 	//<button id='ilikeit' class='tool_addto icn_right button action:toggleOrUpdate' title='I like it!' onclick='dm_menuToggle()'>合法收藏</button>
@@ -50,4 +50,4 @@ setTimeout(function() {
 		if(display == 'inline')document.getElementById('ilikeit_container').style.display = 'none';
 		else document.getElementById('ilikeit_container').style.display = 'inline';
 	}, false);
-}, 500);
+};

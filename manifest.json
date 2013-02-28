@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "__MSG_extName__",
-  "version": "1.8",
+  "version": "1.9.1",
   "description": "__MSG_extDescription__",
   "default_locale": "zh_TW",
   "icons": {
@@ -13,27 +13,32 @@
   "content_scripts": [
     {
       "matches": ["http://www.youtube.com/watch?*", "https://www.youtube.com/watch?*"],
-      "js": ["libs/lib.js", "youtube.js"],
+      "js": ["libs/lib.js", "target/youtube.js"],
       "run_at": "document_end"
     },
     {
       "matches": ["http://mymedia.yam.com/m/*"],
-      "js": ["libs/lib.js", "yam.js"],
+      "js": ["libs/lib.js", "target/yam.js"],
       "run_at": "document_end"
     },
     {
       "matches": ["http://www.dailymotion.com/video/*"],
-      "js": ["libs/lib.js", "dailymotion.js"],
+      "js": ["libs/lib.js", "target/dailymotion.js"],
       "run_at": "document_end"
     },
     {
       "matches": ["http://www.funshion.com/subject/play/*"],
-      "js": ["funshion.js"],
+      "js": ["target/funshion.js"],
       "run_at": "document_end"
     },
     {
       "matches": ["http://v.pps.tv/play_*"],
-      "js": ["libs/jquery-1.8.3.min.js", "libs/async.js", "ppstream.js"],
+      "js": ["libs/jquery-1.8.3.min.js", "libs/async.js", "target/ppstream.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://www.facebook.com/*", "https://www.facebook.com/photo.php?v=*", "https://www.facebook.com/video.php?v=*"],
+      "js": ["target/facebook.js"],
       "run_at": "document_end"
     }
   ],
@@ -43,6 +48,6 @@
   "browser_action": {
 	  "default_icon": "imgs/swiss.png",
     "default_title": "__MSG_extName__",
-    "default_popup": "intro.html"
+    "default_popup": "popup/intro.html"
   }
 }
