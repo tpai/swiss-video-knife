@@ -56,7 +56,8 @@ xhr.onreadystatechange = function() {
     if (xhr.readyState == 4) {
         if (xhr.status == 200) {
             //console.log(xhr.responseText);
-            var json = eval('(' + xhr.responseText + ')');
+            //var json = eval('(' + xhr.responseText + ')');
+			var json = JSON.parse(xhr.responseText);
             var info = json.playinfos;
             for(var i=0;i<info.length;i++) {
                 var video_info_url = "http://jobsfe.funshion.com/query/v1/mp4/"+info[i].cid+".json?bits="+info[i].byterate;
@@ -100,7 +101,8 @@ var load = function(video_info_url, dub_one) {
         if (xhr_main.readyState == 4) {
             if (xhr_main.status == 200) {
               //console.log(xhr_main.responseText);
-              var json_main = eval('(' + xhr_main.responseText + ')');
+              //var json_main = eval('(' + xhr_main.responseText + ')');
+			  var json_main = JSON.parse(xhr_main.responseText);
               //console.log(json_main.playlist[0].urls);
               var video_urls = json_main.playlist[0].urls;
               for(var j=0;j<video_urls.length;j++) {
