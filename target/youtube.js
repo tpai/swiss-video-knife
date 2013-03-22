@@ -1,7 +1,7 @@
 setTimeout(function() {
 	for(var j=0;j<document.scripts.length;j++) {
-		if(matched = document.scripts[j].innerHTML.match(/yt.playerConfig = [^<]*/)) {
-			var yt = JSON.parse(matched[0].replace(/yt.playerConfig = /g, "").replace(/\};/g, "}"));
+		if(matched = document.scripts[j].innerHTML.match(/ytplayer.config = [^<]*/)) {
+			var yt = JSON.parse(matched[0].replace(/ytplayer.config = /g, "").replace(/\};/g, "}"));
 			var url_arr = yt.args.url_encoded_fmt_stream_map.split(",")
 			var each_fmt = yt.args.fmt_list.replace(/\\\//g, "/").split(",")
 
