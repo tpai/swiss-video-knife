@@ -1,5 +1,15 @@
 window.onload = function() {
-	var video_id = location.href.match(/watch\/(\w*)/)[1]
+	
+	$("#videoMenuTopList").append("<li class='videoMenuList'><a id='download_btn' href='#' class='myDownloadButton' target='_blank' title='請按右鍵另存'><span></span>下載收藏</a></li>")
+
+	$(".itemLink").click(function() {
+		var url = $(this).prop("href")
+		getVideo(url.match(/watch\/(\w*)/)[1])
+	})
+	getVideo(location.href.match(/watch\/(\w*)/)[1])
+}
+
+var getVideo = function(video_id) {
 	var getflv = "http://flapi.nicovideo.jp/api/getflv/"+video_id
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
@@ -12,11 +22,14 @@ window.onload = function() {
 						'	background-position: -131px -64px;'
 						'}'+
 						'</style>'
-					$("#videoMenuTopList").append("<li class='videoMenuList'><a href='"+url+"' class='myDownloadButton' target='_blank' title='請按右鍵另存'><span></span>下載收藏</a></li>")
+					if(url.search(/\?s=/) != -1) {
+						url += "as3"
+					}
+					$("#download_btn").prop("href", url)
 					$("head").append(css)
 			}
 		}
 	};
 	xhr.open('GET', 'http://web.thu.edu.tw/g10049002/www/niconico.php?url='+getflv, true);
 	xhr.send(null);
-}
+};
