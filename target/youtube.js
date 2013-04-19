@@ -13,7 +13,7 @@ setTimeout(function() {
 			var panel = ''+
 			'<div class="action-panel-content" id="action-panel-download" data-panel-loaded="true" style="display: none;">'+
 			'	<div class="watch-playlists-drawer">'+
-		    '	<ul class="playlist-items">';
+			'	<ul class="playlist-items">';
 
 			for(var i=0;i<url_arr.length;i++)
 			{
@@ -34,7 +34,7 @@ setTimeout(function() {
 			panel += ''+
 			'	</ul>'+
 			'	</div>'+
-	  		'</div>';
+			'</div>';
 
 			document.getElementById('watch7-secondary-actions').innerHTML = tab + document.getElementById('watch7-secondary-actions').innerHTML;
 			document.getElementById('watch7-action-panels').innerHTML += panel;

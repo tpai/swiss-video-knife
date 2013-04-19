@@ -4,15 +4,12 @@ var eachfmt = function() {
 		async.nextTick(function(){
 			var type = item;
 			var url = "http://dp.ppstv.com/get_play_url_cdn.php?sid="+location.href.match(/_[^.]*/)[0].replace(/_/g, "")+"&flash_type=1&type="+type;
-			//console.log("url="+url)
 			var xhr = new XMLHttpRequest();
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4) {
 					if (xhr.status == 200) {
 						var result = xhr.responseText;
-						//console.log("type="+type)
 						if(result.search("hd="+type) != -1) {
-							//console.log(result)
 							//1=高清 2=流暢 3=普通
 							var txt;
 							switch(type) {
