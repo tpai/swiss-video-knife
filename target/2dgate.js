@@ -6,7 +6,7 @@ window.onload = function() {
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4) {
 				if (xhr.status == 200) {
-					var result = xhr.responseText;
+					var result = xhr.responseText
 					var video_fmts = 
 						decodeURIComponent(
 							result.match(/fmt_list=[^&]*/g)[0].replace(/fmt_list=/g, '')
@@ -19,17 +19,17 @@ window.onload = function() {
 					
 					for(var i=0;i<video_urls_complex.length;i++) {
 						if(i == 0 && id != 0) {
-							list.innerHTML += "\n<br>";
+							list.innerHTML += "\n<br>"
 						}
 
 						create_list(id, '('+video_fmts[i]+')', video_urls_complex[i].replace(/url=/g, ''))
 						
 						if(i == video_urls_complex.length - 1) {
-							callback(null);
+							callback(null)
 						}
 					}
 				} else {
-					console.log(xhr.status);
+					console.log(xhr.status)
 				}
 			}
 		};
@@ -48,7 +48,7 @@ window.onload = function() {
 			);
 			link.setAttribute("style", "font-size: 16px; padding: 5px;");
 			var ep = id+1;
-			link.innerHTML = "EP"+((ep<10)?"0"+ep:ep)+format;
+			link.innerHTML = "EP"+((ep<10)?"0"+ep:ep)+" "+format;
 			list.appendChild(link);
 		}
 	};
@@ -68,32 +68,59 @@ window.onload = function() {
 	list.appendChild(hr);
 
 	var tabs = document.getElementsByClassName("ui-tabs-panel")
-	var count = 0;
-	async.forEachSeries(tabs, function(tab, callback) {
-		var gd = tab.getElementsByClassName("gd_thumb")
-		var jwp = tab.getElementsByTagName("object")
-		if(gd.length > 0) {
-			get_video_info(count, gd[0].onclick.toString().match(/'[^)]*/g)[0].replace(/'/g, ""), callback)
-		}
-		else if(jwp.length > 0) {
-			var params = jwp[0].getElementsByTagName("param");
-			for(var j=0;j<params.length;j++) {
-				if(params[j].name == "flashvars") {
-					if(count != 0)list.innerHTML += "\n<br>";
-					create_list(count, "", params[j].value.match(/file=[^&]*/)[0].replace(/file=/g, ""))
-					callback(null);
-					break;
+	if(tabs.length > 0) {
+		var count = 0;
+		async.forEachSeries(tabs, function(tab, callback) {
+			var gd = tab.getElementsByClassName("gd_thumb")
+			var jwp = tab.getElementsByTagName("object")
+			if(gd.length > 0) {
+				get_video_info(count, gd[0].onclick.toString().match(/'[^)]*/g)[0].replace(/'/g, ""), callback)
+			}
+			else if(jwp.length > 0) {
+				var params = jwp[0].getElementsByTagName("param");
+				for(var j=0;j<params.length;j++) {
+					if(params[j].name == "flashvars") {
+						if(count != 0)list.innerHTML += "\n<br />";
+						create_list(count, "", params[j].value.match(/file=[^&]*/)[0].replace(/file=/g, ""))
+						callback(null)
+						break
+					}
 				}
 			}
+			else {
+				callback(null)
+			}
+			count ++;
+		}, function(err) {
+			if(err)throw err
+			document.getElementsByClassName("intro")[0].removeChild(loading)
+			document.getElementsByClassName("intro")[0].appendChild(list)
+		})
+	}
+	
+	var btns = document.getElementsByClassName("jw-btn")
+	if(btns.length == 1) {
+		var jwpId = btns[0].getElementsByTagName("button")[0].onclick.toString().match(/jwplayer\('([^']*)'\)/)[1]
+		var jwp = document.getElementById(jwpId)
+		var params = jwp.getElementsByTagName("param")
+		for(var j=0;j<params.length;j++) {
+			if(params[j].name == "flashvars") {
+				var str = decodeURIComponent(params[j].value).match(/\[\[JSON\]\]([^$]*\])/)[1]
+				var objs = JSON.parse(str)
+				var counter = 0
+				async.forEachSeries(objs, function(obj, callback) {
+					if(obj.file.match(/http:\/\//) != null) {
+						if(counter != 0)list.innerHTML += "\n<br />";
+						create_list(counter, "("+obj.file.match(/\[([0-9]{1,}P)\]/)[1]+")", obj.file)
+						counter++
+						callback(null)
+					}
+				}, function(err) {
+					if(err)throw err
+					document.getElementsByClassName("intro")[0].removeChild(loading)
+					document.getElementsByClassName("intro")[0].appendChild(list)
+				})
+			}
 		}
-		else {
-			callback(null)
-			//console.log("none");
-		}
-		count ++;
-	}, function(err) {
-		if(err)throw err;
-		document.getElementsByClassName("intro")[0].removeChild(loading)
-		document.getElementsByClassName("intro")[0].appendChild(list)
-	})
+	}
 };

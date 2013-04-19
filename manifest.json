@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "__MSG_extName__",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "__MSG_extDescription__",
   "default_locale": "zh_TW",
   "icons": {
@@ -44,6 +44,11 @@
     {
       "matches": ["http://2d-gate.org/thread-*"],
       "js": ["libs/jquery-1.8.3.min.js", "libs/async.js", "target/2dgate.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["http://www.nicovideo.jp/watch/*"],
+      "js": ["libs/jquery-1.8.3.min.js", "target/niconico.js"],
       "run_at": "document_end"
     }
   ],

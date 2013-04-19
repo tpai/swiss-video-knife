@@ -8,7 +8,7 @@ var get_fb_video = function() {
 	}
 
 	for(var i=0;i<obj_arr.length;i++) {
-		var json = JSON.parse(decodeURIComponent(obj_arr[i].getAttribute("flashvars")).match(/\{[^\}]*\}/)[0])
+		var json = JSON.parse(decodeURIComponent(obj_arr[i].getAttribute("flashvars")).match(/\{[^$]*\}\]\}/)[0])
 		console.log("SD: "+json.sd_src)
 		console.log("HD: "+json.hd_src)
 
