@@ -109,10 +109,13 @@ window.onload = function() {
 				var objs = JSON.parse(str)
 				var counter = 0
 				async.forEachSeries(objs, function(obj, callback) {
-					if(obj.file.match(/http:\/\//) != null) {
+					if(obj.file.match(/http:\/\//) != null || obj.file.match(/https:\/\//) != null) {
 						if(counter != 0)list.innerHTML += "\n<br />";
-						create_list(counter, "("+obj.file.match(/\[([0-9]{1,}P)\]/)[1]+")", obj.file)
+						create_list(counter, "", obj.file)
 						counter++
+						callback(null)
+					}
+					else {
 						callback(null)
 					}
 				}, function(err) {
