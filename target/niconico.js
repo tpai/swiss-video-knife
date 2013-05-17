@@ -30,6 +30,6 @@ var getVideo = function(video_id) {
 			}
 		}
 	};
-	xhr.open('GET', 'http://web.thu.edu.tw/g10049002/www/niconico.php?url='+getflv, true);
+	xhr.open('GET', 'http://web.thu.edu.tw/g10049002/www/niconico.php?url='+getflv+'&cookie='+encodeURIComponent(document.cookie), true);
 	xhr.send(null);
 };
