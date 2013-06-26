@@ -81,30 +81,27 @@ window.onload = function() {
 	}
 	
 	var btns = $(".jw-btn")
-	if(btns.length == 1) {
-		var jwpId = btns[0].getElementsByTagName("button")[0].onclick.toString().match(/jwplayer\('([^']*)'\)/)[1]
-		var jwp = document.getElementById(jwpId)
-		var params = jwp.getElementsByTagName("param")
-		for(var j=0;j<params.length;j++) {
-			if(params[j].name == "flashvars") {
-				var str = decodeURIComponent(params[j].value).match(/\[\[JSON\]\]([^$]*\])/)[1]
-				var objs = JSON.parse(str)
-				var counter = 0
-				async.forEachSeries(objs, function(obj, callback) {
-					if(obj.file.match(/http:\/\//) != null || obj.file.match(/https:\/\//) != null) {
-						if(counter != 0)html += "\n<br />";
-						create_list(counter, "", obj.file)
-						counter++
-						callback(null)
-					}
-					else {
-						callback(null)
-					}
-				}, function(err) {
-					if(err)throw err
-					$("#loading").remove()
-					$(".intro").append(html)
-				})
+	if(btns.length >= 1) {
+		for(var i=0;i<btns.length;i++) {
+			var jwpId = $(btns[i]).find("button")[0].onclick.toString().match(/jwplayer\('([^']*)'\)/)[1]
+			var jwp = $("#"+jwpId)
+			var param = $(jwp).find("param[name='flashvars']")
+			var str = decodeURIComponent($(param).prop("value")).match(/\[\[JSON\]\]([^$]*\])/)[1]
+			var objs = JSON.parse(str)
+
+			for(var j=0;j<objs.length;j++) {
+				var obj = objs[j]
+				if(obj.file.match(/http:\/\//) != null || obj.file.match(/https:\/\//) != null) {
+					create_list(j, "", obj.file)
+					html += "\n<br />"
+				}
+			}
+			
+			html += "\n<br />"
+
+			if(i == btns.length - 1) {
+				$("#loading").remove()
+				$(".intro").append(html)
 			}
 		}
 	}
