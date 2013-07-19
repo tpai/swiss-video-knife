@@ -13,12 +13,12 @@ var get_fb_video = function() {
 		var hd_src = json.video_data[0].hd_src
 
 		var sd = document.createElement("a")
-			sd.innerHTML = "收藏影片(一般)";
+			sd.innerHTML = "收藏影片(一般)"
 			sd.setAttribute("href", sd_src)
 			sd.setAttribute("target", "_blank")
 
 		var hd = document.createElement("a")
-			hd.innerHTML = "收藏影片(高清)";
+			hd.innerHTML = "收藏影片(高清)"
 			hd.setAttribute("href", hd_src)
 			hd.setAttribute("target", "_blank")
 
@@ -44,7 +44,7 @@ var get_fb_video = function() {
 var number_of_embed = 0;
 setInterval(function() {
 	if(document.getElementsByTagName("embed").length > number_of_embed) {
-		number_of_embed = document.getElementsByTagName("embed").length;
-		get_fb_video();
+		get_fb_video()
 	}
+	number_of_embed = document.getElementsByTagName("embed").length
 }, 1000)

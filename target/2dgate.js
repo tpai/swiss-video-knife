@@ -92,7 +92,7 @@ window.onload = function() {
 			for(var j=0;j<objs.length;j++) {
 				var obj = objs[j]
 				if(obj.file.match(/http:\/\//) != null || obj.file.match(/https:\/\//) != null) {
-					create_list(j, "", obj.file)
+					create_list(j, "", encodeURIComponent(obj.file))
 					html += "\n<br />"
 				}
 			}

@@ -24,7 +24,7 @@ setTimeout(function() {
 					if(url_arr[i].match(/\&sig=\w{0,}.\w{0,}/) != null) {
 						sig = "&signature="+getParameterByName(url_arr[i], "sig");
 					}
-					else {
+					else if(url_arr[i].match(/\&s=\w{0,}.\w{0,}/) != null) {
 						sig = "&signature="+sigHandler(getParameterByName(url_arr[i], "s"));
 					}
 					var tag = getParameterByName(url_arr[i], "type");
