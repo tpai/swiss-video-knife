@@ -22,13 +22,10 @@ window.onload = function() {
 						).match(/url=[^&]*/g)
 					
 					for(var i=0;i<video_urls_complex.length;i++) {
-						if(i == 0 && id != 0) {
-							html += "\n<br />";
-						}
-
 						create_list(id, '('+video_fmts[i]+')', video_urls_complex[i].replace(/url=/g, ''))
-						
+
 						if(i == video_urls_complex.length - 1) {
+							html += "\n\n<br /><br />"
 							callback(null)
 						}
 					}
@@ -43,27 +40,30 @@ window.onload = function() {
 
 	var create_list = function(id, format, href) {
 		if(href != "()") {
-			var ep = id+1;
-			var link = "<a href='"+decodeURIComponent(href)+"' target='_blank' style='font-size: 16px; padding: 5px;'>"+("EP"+((ep<10)?"0"+ep:ep)+" "+format)+"</a>";
+			var ep = parseInt(id, 10)+1;
+			var link = "<a href='"+decodeURIComponent(href)+"' target='_blank' style='font-size: 14px; padding: 3px;'>"+("EP"+((ep<10)?"0"+ep:ep)+" "+format)+"</a>";
 			html += link;
 		}
 	};
 	
-	var tabs = $(".ui-tabs-panel")
+	var tabs = $(".ui-tabs-panel:not(:has(ul[role='tablist']))")
 	if(tabs.length > 0) {
-		var count = 0;
 		async.forEachSeries(tabs, function(tab, callback) {
+			var id = $(tab).prop("id").match(/tab-\w{1,}-(\d{1,})/)[1]
 			var gd = $(tab).find(".gd_thumb")
 			var jwp = tab.getElementsByTagName("object")
 			if(gd.length > 0) {
-				get_video_info(count, gd[0].onclick.toString().match(/'[^)]*/g)[0].replace(/'/g, ""), callback)
+				var docid = tab.innerHTML.match(/'[^)]*/g)[0].replace(/'/g, "")
+				if(docid != null) {
+					get_video_info(id, docid, callback)
+				}
 			}
 			else if(jwp.length > 0) {
 				var params = jwp[0].getElementsByTagName("param");
 				for(var j=0;j<params.length;j++) {
 					if(params[j].name == "flashvars") {
-						if(count != 0)html += "\n<br />";
-						create_list(count, "", params[j].value.match(/file=[^&]*/)[0].replace(/file=/g, ""))
+						create_list(id, "", params[j].value.match(/file=[^&]*/)[0].replace(/file=/g, ""))
+						html += "\n\n<br /><br />"
 						callback(null)
 						break
 					}
@@ -72,37 +72,10 @@ window.onload = function() {
 			else {
 				callback(null)
 			}
-			count ++;
 		}, function(err) {
 			if(err)throw err
 			$("#loading").remove()
 			$(".intro").append(html)
 		})
-	}
-	
-	var btns = $(".jw-btn")
-	if(btns.length >= 1) {
-		for(var i=0;i<btns.length;i++) {
-			var jwpId = $(btns[i]).find("button")[0].onclick.toString().match(/jwplayer\('([^']*)'\)/)[1]
-			var jwp = $("#"+jwpId)
-			var param = $(jwp).find("param[name='flashvars']")
-			var str = decodeURIComponent($(param).prop("value")).match(/\[\[JSON\]\]([^$]*\])/)[1]
-			var objs = JSON.parse(str)
-
-			for(var j=0;j<objs.length;j++) {
-				var obj = objs[j]
-				if(obj.file.match(/http:\/\//) != null || obj.file.match(/https:\/\//) != null) {
-					create_list(j, "", encodeURIComponent(obj.file))
-					html += "\n<br />"
-				}
-			}
-			
-			html += "\n<br />"
-
-			if(i == btns.length - 1) {
-				$("#loading").remove()
-				$(".intro").append(html)
-			}
-		}
 	}
 };
