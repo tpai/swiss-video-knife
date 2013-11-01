@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "__MSG_extName__",
-	"version": "2.4",
+	"version": "2.4.2",
 	"description": "__MSG_extDescription__",
 	"default_locale": "zh_TW",
 	"icons": {
@@ -17,8 +17,13 @@
 			"run_at": "document_end"
 		},
 		{
+			"matches": ["https://www.facebook.com/*", "https://www.facebook.com/photo.php?v=*", "https://www.facebook.com/video.php?v=*"],
+			"js": ["target/facebook.js"],
+			"run_at": "document_end"
+		},
+		{
 			"matches": ["http://mymedia.yam.com/m/*"],
-			"js": ["target/yam.js"],
+			"js": ["libs/jquery-1.8.3.min.js", "target/yam.js"],
 			"run_at": "document_end"
 		},
 		{
@@ -28,17 +33,12 @@
 		},
 		{
 			"matches": ["http://www.funshion.com/subject/play/*"],
-			"js": ["target/funshion.js"],
+			"js": ["libs/jquery-1.8.3.min.js", "target/funshion.js"],
 			"run_at": "document_end"
 		},
 		{
 			"matches": ["http://v.pps.tv/play_*"],
 			"js": ["libs/jquery-1.8.3.min.js", "libs/async.js", "target/ppstream.js"],
-			"run_at": "document_end"
-		},
-		{
-			"matches": ["https://www.facebook.com/*", "https://www.facebook.com/photo.php?v=*", "https://www.facebook.com/video.php?v=*"],
-			"js": ["target/facebook.js"],
 			"run_at": "document_end"
 		},
 		{
@@ -53,7 +53,7 @@
 		},
 		{
 			"matches": ["http://vlog.xuite.net/play/*"],
-			"js": ["target/xuite.js"],
+			"js": ["libs/jquery-1.8.3.min.js", "target/xuite.js"],
 			"run_at": "document_end"
 		}
 	],

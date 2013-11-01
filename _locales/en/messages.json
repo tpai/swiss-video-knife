@@ -1,0 +1,12 @@
+{
+	"extName":
+	{
+		"message": "Swiss Video Knife",
+		"description":"擴充套件名稱"
+	},
+	"extDescription":
+	{
+		"message": "Don't do anything illegal by using this tool.",
+		"description":"擴充套件描述"
+	}
+}

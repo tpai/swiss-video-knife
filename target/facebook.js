@@ -1,8 +1,18 @@
-var get_fb_video = function() {
-	var obj_arr = document.getElementsByTagName("embed");
+var number_of_embed = 0
+// keep detect if any videoStage popup
+setInterval(function() {
+	if(document.getElementsByTagName("embed").length > number_of_embed) {
+		get_fb_video()
+	}
+	number_of_embed = document.getElementsByTagName("embed").length
+}, 1000)
 
-	var fbPhotoPageActions = document.getElementById("fbPhotoPageActions");
+var get_fb_video = function() {
+
+	var obj_arr = document.getElementsByTagName("embed");
+	var fbPhotoPageActions = document.getElementById("fbPhotoPageActions")
 	var fbPhotoSnowliftActions = document.getElementById("fbPhotoSnowliftActions")
+
 	if(fbPhotoPageActions != null && fbPhotoSnowliftActions != null) {
 		obj_arr.pop();
 	}
@@ -40,11 +50,3 @@ var get_fb_video = function() {
 		}
 	}
 };
-
-var number_of_embed = 0;
-setInterval(function() {
-	if(document.getElementsByTagName("embed").length > number_of_embed) {
-		get_fb_video()
-	}
-	number_of_embed = document.getElementsByTagName("embed").length
-}, 1000)

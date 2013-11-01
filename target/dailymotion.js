@@ -11,11 +11,6 @@ var get_video_info = function(id) {
 			if (xhr.status == 200) {
 				var result = xhr.responseText
 				var json = JSON.parse(result.match(/var info = (\{[^\n]*\}),/)[1])
-				console.log("nm="+json.stream_h264_url)
-				console.log("ld="+json.stream_h264_ld_url)
-				console.log("hq="+json.stream_h264_hq_url)
-				console.log("hd="+json.stream_h264_hd_url)
-				console.log("hd1080="+json.stream_h264_hd1080_url)
 
 				var html = ""
 				var data = [
