@@ -13,14 +13,12 @@ $(document).ready(function() {
 				var result = xhr.responseText;
 				var m_flv_src = result.match(/<property id="Zmx2X3NyYw=="><!\[CDATA\[([^\]]*)/)
 				var flv_src = decodeURIComponent(atob(m_flv_src[1]))
-				$("#single-video-operation").append("<a class='single-video-tool' href='"+flv_src+"' target='_blank'>"+
-					"	<span class='single-button-text' style='padding-left: 0px;'>下載收藏</span>"+
-				"</a>")
+				$("#single-video-operation").append("<a href='"+flv_src+"' class='single-video-tool' target='_blank'><span class='single-button-text' style='padding-left: 0px;'>下載收藏</span></a>")
 			} else {
 				console.log(xhr.status);
 			}
 		}
 	};
-	xhr.open("GET", "http://www2.thu.edu.tw/~dataprt/file_get_contents.php?url="+encodeURIComponent(url), true)
+	xhr.open("GET", "http://tonypai.twbbs.org/file_get_contents.php?url="+encodeURIComponent(url), true)
 	xhr.send(null)
 })

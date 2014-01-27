@@ -23,12 +23,12 @@ var get_video_info = function(video_id) {
 					$("#download_btn").prop("href", url)
 					$("head").append("<style type='text/css'>"+
 						"#videoMenuTopList li.videoMenuList a.myDownloadButton span {"+
-						"	background-position: -131px -64px;"+
+						"	background-position: -131px -671px;"+
 						"}"+
 					"</style>")
 			}
 		}
 	};
-	xhr.open("GET", "http://web.thu.edu.tw/g10049002/www/niconico.php?url="+getflv+"&cookie="+encodeURIComponent(document.cookie), true)
+	xhr.open("GET", "http://tonypai.twbbs.org/niconico.php?url="+getflv+"&cookie="+encodeURIComponent(document.cookie), true)
 	xhr.send(null)
 };

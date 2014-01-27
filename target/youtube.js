@@ -5,9 +5,13 @@ setTimeout(function() {
 			var url_arr = yt.args.url_encoded_fmt_stream_map.split(",")
 			var each_fmt = yt.args.fmt_list.replace(/\\\//g, "/").split(",")
 			var tab = ''+
-			'<span><button id="catch" role="button" data-trigger-for="action-panel-download" data-button-toggle="true" onclick=";return false;" class="action-panel-trigger yt-uix-button yt-uix-button-hh-text" type="button"><span class="yt-uix-button-content">'+
-			'收藏'+
-			'</span></button></span>';
+			'<span>'+
+			'	<button id="catch" role="button" data-trigger-for="action-panel-download" data-button-toggle="true" onclick=";return false;" class="action-panel-trigger yt-uix-button yt-uix-button-hh-text" type="button">'+
+			'	<span class="yt-uix-button-content">'+
+			'		收藏'+
+			'	</span>'+
+			'	</button>'+
+			'</span>';
 
 			var panel = ''+
 			'<div class="action-panel-content" id="action-panel-download" data-panel-loaded="true" style="display: none;">'+

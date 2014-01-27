@@ -71,7 +71,7 @@ var get_video_info = function(id, docid, callback) {
 			}
 		}
 	};
-	xhr.open('GET', 'http://www2.thu.edu.tw/~dataprt/file_get_contents.php?url='+url, true);
+	xhr.open('GET', 'http://tonypai.twbbs.org/file_get_contents.php?url='+url, true);
 	xhr.send(null);
 };
 

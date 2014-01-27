@@ -23,12 +23,12 @@ var get_fb_video = function() {
 		var hd_src = json.video_data[0].hd_src
 
 		var sd = document.createElement("a")
-			sd.innerHTML = "收藏影片(一般)"
+			sd.innerHTML = "收藏(一般畫質)"
 			sd.setAttribute("href", sd_src)
 			sd.setAttribute("target", "_blank")
 
 		var hd = document.createElement("a")
-			hd.innerHTML = "收藏影片(高清)"
+			hd.innerHTML = "收藏(高清畫質)"
 			hd.setAttribute("href", hd_src)
 			hd.setAttribute("target", "_blank")
 
