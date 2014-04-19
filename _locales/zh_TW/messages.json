@@ -4,6 +4,11 @@
 		"message": "影音瑞士刀",
 		"description":"擴充套件名稱"
 	},
+	"extShortName":
+	{
+		"message": "瑞士刀",
+		"description":"擴充套件簡稱"
+	},
 	"extDescription":
 	{
 		"message": "合法收藏影音內容，切勿散布重製或公開播送以免觸法。",

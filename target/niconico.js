@@ -23,7 +23,7 @@ var get_video_info = function(video_id) {
 					$("#download_btn").prop("href", url)
 					$("head").append("<style type='text/css'>"+
 						"#videoMenuTopList li.videoMenuList a.myDownloadButton span {"+
-						"	background-position: -131px -671px;"+
+						"	background-position: -131px -927px;"+
 						"}"+
 					"</style>")
 			}

@@ -4,6 +4,11 @@
 		"message": "Swiss Video Knife",
 		"description":"擴充套件名稱"
 	},
+	"extShortName":
+	{
+		"message": "SVK",
+		"description":"擴充套件簡稱"
+	},
 	"extDescription":
 	{
 		"message": "Don't do anything illegal by using this tool.",
