@@ -14,7 +14,7 @@ $(document).ready(function() {
 					url = result.match(/mp3file=[^&]*/)[0].replace(/mp3file=/g, "")
 				}
 				if(url.search("UploadToYoutube") == -1) {
-					$(".heading").append("　<span style='background-color: #5C7287; color: white;'>»»»【<a style='color: yellow;' href='"+url+"'>合法收藏</a>】</span>")
+					$(".heading").append("　<span style='background-color: #5C7287; color: white;'>»»»【<a style='color: yellow;' href='"+url+"'>下載收藏</a>】</span>")
 				}
 				else {
 					$(".heading").append("　<span style='background-color: #5C7287; color: white;'>»»»【此影音檔位於youtube】</span>")

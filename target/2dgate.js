@@ -1,4 +1,7 @@
-var html = "<h1>下載收藏</h1><hr>"
+var server = "tonypai.twbbs.org";
+var backup = "www2.thu.edu.tw/~dataprt";
+var domain = server;
+var html = "<h1>下載收藏</h1><hr>";
 
 $(document).ready(function() {
 
@@ -42,8 +45,8 @@ $(document).ready(function() {
 })
 
 var get_video_info = function(id, docid, callback) {
-	var url = 'http://docs.google.com/get_video_info?docid='+docid;
-	var xhr = new XMLHttpRequest();
+	var url = 'http://docs.google.com/get_video_info?docid='+docid
+	var xhr = new XMLHttpRequest()
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
@@ -66,13 +69,15 @@ var get_video_info = function(id, docid, callback) {
 						callback(null)
 					}
 				}
-			} else {
+			} else {				
+				domain = backup
+				get_video_info(id, docid, callback)
 				console.log(xhr.status)
 			}
 		}
 	};
-	xhr.open('GET', 'http://tonypai.twbbs.org/file_get_contents.php?url='+url, true);
-	xhr.send(null);
+	xhr.open('GET', 'http://'+domain+'/file_get_contents.php?url='+url, true)
+	xhr.send(null)
 };
 
 var create_link = function(id, format, href) {

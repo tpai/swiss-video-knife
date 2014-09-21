@@ -1,10 +1,18 @@
+var server = "tonypai.twbbs.org";
+var backup = "www2.thu.edu.tw/~dataprt";
+var domain = server;
+
 $(document).ready(function() {
+	xhrRequest()
+})
+
+var xhrRequest = function () {
 	var s_url = location.href.split("/")
 	var vid = s_url[4]
 	var filename = atob(vid)
 	var m_filename = filename.match(/\w{1,}-(\d{1,}).flv/)
 	var media_id = btoa(m_filename[1])
-
+	
 	var url = "http://vlog.xuite.net/flash/player?media="+media_id
 	var xhr = new XMLHttpRequest()
 	xhr.onreadystatechange = function() {
@@ -15,10 +23,12 @@ $(document).ready(function() {
 				var flv_src = decodeURIComponent(atob(m_flv_src[1]))
 				$("#single-video-operation").append("<a href='"+flv_src+"' class='single-video-tool' target='_blank'><span class='single-button-text' style='padding-left: 0px;'>下載收藏</span></a>")
 			} else {
+				domain = backup
+				xhrRequest()
 				console.log(xhr.status);
 			}
 		}
 	};
-	xhr.open("GET", "http://tonypai.twbbs.org/file_get_contents.php?url="+encodeURIComponent(url), true)
+	xhr.open("GET", "http://"+domain+"/file_get_contents.php?url="+encodeURIComponent(url), true)
 	xhr.send(null)
-})
+};
