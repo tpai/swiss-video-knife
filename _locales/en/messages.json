@@ -2,16 +2,16 @@
 	"extName":
 	{
 		"message": "Swiss Video Knife",
-		"description":"擴充套件名稱"
+		"description":"Extension Name"
 	},
 	"extShortName":
 	{
 		"message": "SVK",
-		"description":"擴充套件簡稱"
+		"description":"Extension Short Name"
 	},
 	"extDescription":
 	{
 		"message": "Don't do anything illegal by using this tool.",
-		"description":"擴充套件描述"
+		"description":"Extension Description"
 	}
 }
