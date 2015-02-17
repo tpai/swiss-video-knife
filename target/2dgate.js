@@ -1,6 +1,3 @@
-var server = "tonypai.twbbs.org";
-var backup = "www2.thu.edu.tw/~dataprt";
-var domain = server;
 var html = "<h1>下載收藏</h1><hr>";
 
 $(document).ready(function() {
@@ -45,7 +42,7 @@ $(document).ready(function() {
 })
 
 var get_video_info = function(id, docid, callback) {
-	var url = 'http://docs.google.com/get_video_info?docid='+docid
+	var url = 'https://docs.google.com/get_video_info?docid='+docid
 	var xhr = new XMLHttpRequest()
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4) {
@@ -69,14 +66,13 @@ var get_video_info = function(id, docid, callback) {
 						callback(null)
 					}
 				}
-			} else {				
-				domain = backup
-				get_video_info(id, docid, callback)
-				console.log(xhr.status)
+			} else {
+				console.log('%c影音瑞士刀故障了！請立即至chrome應用程式商店回報並附上連結。', 'color: red; font-size: 26px;');
+				console.log(">> https://chrome.google.com/webstore/detail/%E5%BD%B1%E9%9F%B3%E7%91%9E%E5%A3%AB%E5%88%80/kgcpkfeieiadioehehbnmgmabfhcbpoc");
 			}
 		}
 	};
-	xhr.open('GET', 'http://'+domain+'/file_get_contents.php?url='+url, true)
+	xhr.open('GET', 'http://www2.thu.edu.tw/~dataprt/file_get_contents.php?url='+url, true)
 	xhr.send(null)
 };
 

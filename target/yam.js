@@ -20,7 +20,8 @@ $(document).ready(function() {
 					$(".heading").append("　<span style='background-color: #5C7287; color: white;'>»»»【此影音檔位於youtube】</span>")
 				}
 			} else {
-				console.log(xhr.status)
+				console.log('%c影音瑞士刀故障了！請立即至chrome應用程式商店回報並附上連結。', 'color: red; font-size: 26px;');
+				console.log(">> https://chrome.google.com/webstore/detail/%E5%BD%B1%E9%9F%B3%E7%91%9E%E5%A3%AB%E5%88%80/kgcpkfeieiadioehehbnmgmabfhcbpoc");
 			}
 		}
 	};

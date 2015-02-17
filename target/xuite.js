@@ -1,11 +1,5 @@
-var server = "tonypai.twbbs.org";
-var backup = "www2.thu.edu.tw/~dataprt";
-var domain = server;
-
 $(document).ready(function() {
-	
 	$("#single-video-operation").append(a_tag("loading", "#", "影音瑞士刀解析中請稍待..."))
-
 	xhrRequest()
 })
 
@@ -28,12 +22,12 @@ var xhrRequest = function () {
 				var flv_src = decodeURIComponent(atob(m_flv_src[1]))
 				$("#single-video-operation").append(a_tag("target", flv_src, "下載收藏"))
 			} else {
-				domain = backup
-				xhrRequest()
+				console.log('%c影音瑞士刀故障了！請立即至chrome應用程式商店回報並附上連結。', 'color: red; font-size: 26px;');
+				console.log(">> https://chrome.google.com/webstore/detail/%E5%BD%B1%E9%9F%B3%E7%91%9E%E5%A3%AB%E5%88%80/kgcpkfeieiadioehehbnmgmabfhcbpoc");
 			}
 		}
 	};
-	xhr.open("GET", "http://"+domain+"/file_get_contents.php?url="+encodeURIComponent(url), true)
+	xhr.open("GET", "http://www2.thu.edu.tw/~dataprt/file_get_contents.php?url="+encodeURIComponent(url), true)
 	xhr.send(null)
 };
 

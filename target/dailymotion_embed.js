@@ -1,4 +1,4 @@
-$(window).load(function() {
+$(document).ready(function() {
 	var embedId = location.pathname.match(/\/video\/(\w{1,})/)[1]
 	get_video_info(embedId)
 })
